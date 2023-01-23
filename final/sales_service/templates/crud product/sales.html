@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <title>Focus - Bootstrap Admin Dashboard </title>
+<!--gapp links-->
+<style>
+    label{color: black;}
+    th{background-color: rgb(180, 224, 224);
+    color:rgb(37, 13, 104)}
+    .productsize{height: 50px;width: 50px;}
+    td{color:black;}
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+      
+      li {
+        float: left;
+      }
+      
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+      
+      li a:hover {
+        background-color: #111;
+      }
+  
+</style>
+<!-- Site favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="{% static 'vendors/images/apple-touch-icon.png' %}">
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'vendors/images/favicon-32x32.png' %}">
+<link rel="icon" type="image/png" sizes="16x16" href="{% static 'vendors/images/favicon-16x16.png' %}">
+
+<!-- Mobile Specific Metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/core.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/icon-font.min.css' %}">
+
+<link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/style.css' %}">
+<!--gapp links-->
+
+
+	<!--datatable-->
+
+    <!-- Favicon icon -->
+    <link rel="stylesheet" type="text/css" href="{% static 'icon/css/all.css' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'focus/images/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'focus/vendor/owl-carousel/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'focus/vendor/owl-carousel/css/owl.theme.default.min.css' %}">
+    <link href="{% static 'focus/vendor/jqvmap/css/jqvmap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'focus/css/style.css' %}" rel="stylesheet">
+    <!--invoice-->
+    
+
+
+
+
+</head>
+
+<body style="background-color:rgb(247, 248, 251);">
+	<div id="main-wrapper">
+
+<div class="container-fluid" style="padding-bottom: 5px; width: 100.2%;position: relative;">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col">
+
+   
+        
+    <ul>
+        <li><a class="active" href="#home">Home</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+      </div>
+      <div class="col-1"></div>
+      
+     
+</div>
+</div>
+<div class="container" style="background-color:rgba(160, 167, 167, 0.879);">
+    <div class="row" style="background-color: rgb(133, 136, 188);padding-top: 10px;">
+        <div class="col-12">
+            <h3>Sales Invoice</h3>
+        </div>
+    </div>
+<div class="row" >
+<div class="card-body">
+    <div class="basic-form">
+        <form id="myfrm" action=""  method="post">
+
+            <div class="form-row" >
+                <div class="form-group col-md-1" style="text-align: right;top: 12px;">
+                    <label>Invoice No:</label>
+                </div>
+                    <div class="form-group col-md-3"style="text-align: right;">
+                    <input type="number" class="form-control" >
+                </div>
+                <div class="form-group col-md-4"></div>
+                <div class="form-group col-md-1"style="text-align: right;top: 12px;">
+                    <label>Customer:</label>
+                </div>
+               
+                    <div class="form-group col-md-3"style="text-align: right;">
+                    <input list="customerlist" placeholder="search customer" type="text" class="form-control" >
+                        <!-- <option selected disabled="true" >-select customer-</option> -->
+                        <datalist id="customerlist">
+                        {% for j in dropdown1 %}
+                        
+                                                <option value="{{ j.CustomerName }}">
+                                               
+                        {% endfor %}
+                    </datalist>
+                   
+                </div>
+               
+
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-1"style="text-align: right;top: 12px;">
+                    <label>Date:</label>
+                </div>
+                    <div class="form-group col-md-3"style="text-align: right;">
+                    <input type="date" class="form-control" >
+                </div>
+                <div class="form-group col-md-4"style="text-align: right;"></div>
+                <div class="form-group col-md-1"style="text-align: right;top: 12px;">
+                    <label>Mobile:</label>
+                </div>
+                    <div class="form-group col-md-3"style="text-align: right;">
+                    <td><input type="number" class="form-control" name="CPhoneNo"id="CPhoneNo" ></td>
+                </div>
+
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group col-md-8"style="text-align: right;"></div>
+                <div class="form-group col-md-1"style="text-align: right;top: 12px;">
+                    <label>Address:</label>
+                </div>
+                    <div class="form-group col-md-3">
+                      
+                    <td><input type="text" class="form-control"  name="cAddress"></td>
+                   
+                </div>
+            </div>
+            <hr style=" position: relative;
+            width: 103.6%;
+            right:20px;
+           
+            border: none;
+            height: 5px;
+            background: rgb(243, 243, 246);
+            ">
+            <div class="form-row" style="background-color: rgb(133, 136, 188);justify-content: center;top: 10px;">
+                <div class="form-group col-md-1" style="text-align: center;top: 12px; ">
+                    <label>S.No</label>
+                </div>
+                <div class="form-group col-md-2" style="text-align: center;top: 12px;">
+                    <label for="search">Product</label>
+                </div>
+                <div class="form-group col-md-1" style="text-align: center;top: 12px;">
+                    <label>QTY</label>
+                </div>
+                <div class="form-group col-md-2" style="text-align: center;top: 12px;">
+                    <label>M.R.P</label>
+                </div>
+                <div class="form-group col-md-2" style="text-align: center;top: 12px;">
+                    <label for="search">Rate</label>
+                </div>
+                <div class="form-group col-md-1" style="text-align: center;top: 12px;">
+                    <label>Tax</label>
+                </div>
+                <div class="form-group col-md-2" style="text-align: center;top: 12px;">
+                    <label>Total</label>
+                </div>
+                <div class="form-group col-md-1" style="text-align: center;top: 12px;">
+                    <label>Action</label>
+                </div>
+
+            </div>
+            
+                
+            
+            <div class="form-row" id="row" >
+                <div class="form-group col-md-1" style="text-align: center;top: 12px; ">
+                    <input type="number" name="sno" class="form-control" >
+                </div>
+                
+                <div class="form-group col-md-2" style="text-align: center;top: 12px;">
+                    
+                  
+                    <input placeholder="search product.." list="productlist" type="text" class="form-control" id="search">
+                        <!-- <option selected disabled="true">---product---</option> -->
+                       <datalist id="productlist"> 
+                       {% for i in dropdown2 %}
+                         <option value='{{ i.Name }}' >
+                         
+                         {% endfor %}
+                        </datalist>
+                       
+                      
+                   
+                </div>
+          
+                <div class="form-group col-md-1" style="text-align: center;top: 12px;">
+                    <input type="number" name="Quantity" class="form-control" id="search-id3">
+                </div>
+                <div class="form-group col-md-2" style="text-align: center;top: 12px;">
+                   
+                    <input type="number"name="M_R_P" class="form-control" id="search-id2">
+                    
+                </div>
+              
+                <div class="form-group col-md-2" style="text-align: center;top: 12px;">
+                    
+                    <input type="number" name="Rate" class="form-control" id="search-id" >
+                    
+                </div>
+              
+                <div class="form-group col-md-1" style="text-align: center;top: 12px;">
+                    <input type="number" name="tax" class="form-control" >
+                </div>
+                <div class="form-group col-md-2" style="text-align: center;top: 12px;">
+                    <input type="number" name="total" class="form-control" >
+                </div>
+                <div class="form-group col-md-1" style="text-align: center;top: 12px;">
+                    <!-- <i class="fa-regular fa-circle-xmark fa-2x " style="color: rgb(225, 10, 10);padding-right: 8px;"  id="DeleteRow" type="submit"></i> -->
+                    <i class="fa-regular fa-square-plus fa-2x" style="color: rgb(5, 39, 232);" id="rowAdder" type="submit"></i>
+                </div>
+                </div>
+                
+                <div  id="newinput"></div>
+                <hr style=" position: relative;
+                width: 103.6%;
+                right:20px;
+               
+                border: none;
+                height: 5px;
+                background: rgb(243, 243, 246);
+                ">
+                <div class="form-row"  >
+                    <div class="form-group col-md-1" style="text-align: right;top: 12px;">
+                        <label>Total Items</label>
+                    </div>
+                    <div class="form-group col-md-1" style="text-align: center;top: 12px;">
+                        <input type="number"  class="form-control" >
+                    </div>
+                    <div class="form-group col-md-1" style="text-align: right;top: 12px;">
+                        <label>Total Qty</label>
+                    </div>
+                    <div class="form-group col-md-1" style="text-align: center;top: 12px;">
+                        <input type="number"  class="form-control" >
+                    </div>
+                    
+                    <div class="form-group col-md-2" style="text-align: right;top: 12px;">
+                        <label>Total Tax</label>
+                    </div>
+                    <div class="form-group col-md-2" style="text-align: right;top: 12px;">
+                        <input type="number"  class="form-control" >
+                    </div>
+                    <div class="form-group col-md-2" style="text-align: right;top: 12px;">
+                        <label>Gross Total</label>
+                    </div>
+                    <div class="form-group col-md-2" style="text-align: center;top: 12px;">
+                        <input type="number"  class="form-control" >
+                    </div>
+
+                </div>
+                <div class="form-row"  >
+                    <div class="form-group col-md-9"></div>
+                    <div class="form-group col-md-1" style="text-align: right;top: 15px;"><label>Discount</label></div>
+                    <div class="form-group col-md-2" style="text-align: center;top: 12px;">
+                        <input type="number"  class="form-control" >
+                    </div>
+
+                </div>
+                <div class="form-row"  >
+                    <div class="form-group col-md-9"></div>
+                    <div class="form-group col-md-1" style="text-align: right;top: 15px;"><label>Net Total</label></div>
+                    <div class="form-group col-md-2" style="text-align: center;top: 12px;">
+                        <input type="number"  class="form-control" >
+                    </div>
+
+                </div>
+                <div class="form-row"  >
+                    <div class="form-group col-md-8"></div>
+                    <div class="form-group col-md-2" style="text-align: right;top: 15px;"><label>Payement Type</label></div>
+                    <div class="form-group col-md-2" style="text-align: center;top: 12px;">
+                        <input type="number"  class="form-control" >
+                    </div>
+
+                </div>
+                <div class="form-row"  >
+                    <div class="form-group col-md-9"></div>
+                    <div class="form-group col-md-1" style="text-align: right;top: 15px;"><label>Paid</label></div>
+                    <div class="form-group col-md-2" style="text-align: center;top: 12px;">
+                        <input type="number"  class="form-control" >
+                    </div>
+
+                </div>
+                <div class="form-row"  >
+                    
+                    <div class="form-group col-md-1">
+                        <input type="button" class="btn btn-primary"onclick="myPrint('myfrm')" value="print" >
+                    </div>
+                    <div class="form-group col-md-1">
+                        <button type="submit" class="btn btn-primary" >save</button>
+                    </div>
+                   
+                    <div class="form-group col-md-1" >
+                        <button type="submit" class="btn btn-primary" >Clear</button>
+                    </div>
+                    <div class="form-group col-md-5"></div>
+                    <div class="form-group col-md-2"style="text-align: right;top: 15px;"><label>Balance</label></div>
+                    <div class="form-group col-md-2" style="text-align: center;top: 12px;">
+                        <input type="number"  class="form-control" >
+                    </div>
+
+
+                </div>
+
+            
+           
+
+
+
+        </div>
+        </form>
+        
+    </div>
+</div>
+</div>
+</div>
+</div>
+<!--**********************************
+   Scripts
+***********************************-->
+<!-- Required vendors -->
+<script src="{% static 'focus/vendor/global/global.min.js' %}"></script>
+<script src="{% static 'focus/js/quixnav-init.js' %}"></script>
+<script src="{% static 'focus/js/custom.min.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+    integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+<!-- Counter Up -->
+
+
+
+<script src="{% static 'focus/js/dashboard/dashboard-1.js' %}"></script>
+
+<script>
+    function myPrint(myfrm) {
+        var printdata = document.getElementById(myfrm);
+        newwin = window.open("");
+        newwin.document.write(printdata.outerHTML);
+        newwin.print();
+        newwin.close();
+    }
+
+
+    $("#rowAdder").click(function () {
+        newRowAdd =' <div class="form-row" id="row" >'+
+            '<div class="form-group col-md-1" style="text-align: center;top: 12px; ">'+
+                '<input type="number" name="sno" class="form-control" >'+
+            '</div>'+
+         
+            '<div class="form-group col-md-2" style="text-align: center;top: 12px;">'+
+              
+                '<input list="productlist" placeholder="search product.." type="text" class="form-control" id="search" >'+
+                   '<datalist id="productlist">'+
+                    '{% for i in dropdown2 %}'+
+                    '<option value="{{ i.Name }}">'+
+                    '{% endfor %}'+
+                   '</datalist>'+
+               
+            '</div>'+
+           
+            '<div class="form-group col-md-1" style="text-align: center;top: 12px;">'+
+                '<input type="number" name="Quantity" class="form-control"id="search-id3" >'+
+            '</div>'+
+            '<div class="form-group col-md-2" style="text-align: center;top: 12px;">'+
+                
+                '<input type="number"name="M_R_P" class="form-control" id="search-id2"  >'+
+                
+            '</div>'+
+            '<div class="form-group col-md-2" style="text-align: center;top: 12px;">'+
+                '<input type="number" name="Rate" class="form-control"id="search-id" >'+
+            '</div>'+
+            '<div class="form-group col-md-1" style="text-align: center;top: 12px;">'+
+                '<input type="number" name="tax" class="form-control" >'+
+            '</div>'+
+            '<div class="form-group col-md-2" style="text-align: center;top: 12px;">'+
+                '<input type="number" name="total" class="form-control" >'+
+            '</div>'+
+            '<div class="form-group col-md-1" style="text-align: center;top: 12px;">'+
+                '<i class="fa-regular fa-circle-xmark fa-2x add_item_btn" style="color: rgb(225, 10, 10);"  id="DeleteRow" type="button"></i>'+
+            '</div>'+
+            '</div>'+
+            '<div  id="newinput"></div>';
+            $('#newinput').append(newRowAdd);
+            
+        });
+   
+ 
+        $("body").on("click", "#DeleteRow", function () {
+            $(this).parents("#row").remove();
+        });
+     $(function () {
+        $("#search").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/api/product/?search=" + request.term,
+                    type: "GET",
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.Name,
+                                value: item.Rate,
+                                value2:item.M_R_P,
+                                value3:item.Quantity,
+                            };
+                        }));
+                    }
+                });
+            },
+            select: function (event, ui) {
+                $("#search").val(ui.item.label);
+                $("#search-id").val(ui.item.value);
+                $("#search-id2").val(ui.item.value2);
+                $("#search-id3").val(ui.item.value3);
+                return false;
+            },
+        });
+    });
+        
+       
+</script>
+       
+</body>
+
+</html>
+<!-- <script>          
+    // Function to GeneratePdf
+    function GeneratePdf() {
+        var element = document.getElementById('form-print');
+        html2pdf(element);
+    }
+</script>
+
+<script src=
+"https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity=
+"sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" 
+    crossorigin="anonymous">
+</script> -->

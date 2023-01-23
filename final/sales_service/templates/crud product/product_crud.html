@@ -1,0 +1,223 @@
+{% include 'index.html' %}
+<div class="content-body">
+    <div class="container-fluid">
+        
+      
+    <table id="example" class="table table-striped"  >
+        <thead>
+            <tr>
+                <th>Product ID</th>
+            <th>Product Image</th>
+            <th>Product Name</th>
+            <th>Product Category</th>
+            <th>Product MRP</th>
+            <th>Product Rate</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+            
+            
+        </thead>
+        
+        <tbody>
+            {% for k in products.all %}
+           
+            <tr>            <td style="color:rgb(43, 42, 41)">{{ k.P_ID }}</td>
+            <td style="color: rgb(43, 42, 41);"><img src="{{ k.product_image }}"alt="" class="productsize"></td>
+            <td style="color:rgb(43, 42, 41)">{{ k.Name }}</td>
+            <td style="color:rgb(43, 42, 41)">{{ k.category }}</td>
+            <td style="color:rgb(43, 42, 41)">{{ k.M_R_P }}</td>
+            <td style="color:rgb(43, 42, 41)">{{ k.Rate }}</td>
+            <td style="color:rgb(43, 42, 41)">{{ k.Status }}</td>
+            
+            <td><div class="dropdown">
+                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"  role="button" data-toggle="dropdown" aria-expanded="false">
+                  <i class="dw dw-more"style="color:red;"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list" style="">
+                  <a class="dropdown-item"data-toggle="modal" data-target="#" ><i  class="fa-solid fa-eye" style="color:green;" ></i> View</a>
+                  <a class="dropdown-item"data-toggle="modal" data-target=".bd-example-modal-lg{{ k.id }}" ><i class="fa-solid fa-pencil" style="color:black;"></i> Edit</a>
+                  <a class="dropdown-item"data-toggle="modal" data-target=".bds-example-modal-lg{{ k.id }}" ><i class="fa-regular fa-trash-can"style="color:red;"></i> Delete</a>
+                </div>
+              </div></td>
+            </tr>
+
+<!--view model-->
+<div class="modal fade bdss-example-modal-lg{{ k.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Customer Info</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                
+                <!--content-->
+                <ul><li></li>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                
+                            </div>
+                           
+                        
+                    </div>
+                </div>
+            </div>
+           
+          
+        </div>
+    </div>
+
+
+
+
+<!--view model-->
+
+
+            <!--delete model-->
+<div class="modal fade bds-example-modal-lg{{ k.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Customer</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action='{% url "deleteproduct" k.id %}' method="POST">
+                <!--content-->
+                <h4>Are you sure you want to delet these records ?</h4>
+               Product Name:<span><b>{{ k.Name }}</b></span>
+               <p style="color:red;">If it done you cannot retrive these records !!!!</p>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Delete</button>
+                            </div>
+                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+           
+          
+        </div>
+    </div>
+
+
+           
+    <!--model update-->
+    
+<div class="modal fade bd-example-modal-lg{{ k.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Product</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--content-->
+                <div class="card-body">
+                    <div class="basic-form">
+                        <form method="post" action='{% url "updateproduct" k.id %}' enctype="multipart/form-data">
+                            {% csrf_token %}
+    
+                            
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label>Product ID</label>
+                                        <input type="Number" class="form-control" value={{ k.P_ID }} id="P_ID" name="P_ID" Required>
+                                    </div>
+                                   
+                                    
+                                    <div class="form-group col-md-6">
+                                        <label>Product Name</label>
+                                        <input type="text" class="form-control" value={{ k.Name }} name="Name" id="Name" Required  >
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Product Category</label>
+                                        <select id="category" name="category" class="form-control" value={{ k.category }} Required>
+                                            <option selected="">Choose...</option>
+                                            <option>Appliances </option>
+                                            <option>Apps & Games</option>
+                                            <option>Arts, Crafts, & Sewing</option>
+                                            
+                                            <option>Automotive Parts & Accessories</option>
+                                            <option>Beauty & Personal Care</option>
+                                            <option>Cell Phones & Accessories</option>
+                                            <option>Clothing, Shoes and Jewelry</option>
+                                            <option>Collectibles & Fine Art</option>
+                                            <option>Computers</option>
+                                            <option>Electronics</option>
+                                            <option>Garden & Outdoor</option>
+                                            <option>Grocery & Gourmet Food</option>
+                                            <option>Health, Household & Baby Care</option>
+                                            <option>Home & Kitchen</option>
+                                            <option>Industrial & Scientific</option>
+        
+                                           
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Product M.R.P</label>
+                                        <input type="Number" class="form-control" name="M_R_P" id="M_R_P" value={{ k.M_R_P }} Required  >
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Product Rate</label>
+                                        <input type="Number" class="form-control" name="Rate" value={{ k.Rate }} id="Rate" Required  >
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Product Quantity</label>
+                                        <input type="Number" class="form-control" name="Quantity" value={{ k.Quantity }} id="Quantity" Required  >
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Units</label>
+                                        <input type="Number" class="form-control" value={{ k.Units }}  name="Units"  id="Units" Required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>product_image</label>
+                                        <input type="file" class="form-control" value={{ k.product_image }} name="product_image" id="product_image" Required >
+                                    </div>
+                                
+                                    <div class="form-group col-md-6">
+                                        <label>Status</label>
+                                        <select id="Status" name="Status" class="form-control" value={{ k.Status }} Required>
+                                            <option selected="">Choose...</option>
+                                            <option>Available</option>
+                                            <option>NON-Available</option>
+                                           
+                                        </select>
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Notes</label>
+                                    <textarea class="form-control" rows="4" id="Notes" name="Notes" value={{ k.Notes }} Required></textarea>
+                                </div>
+                            
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+           
+          
+        </div>
+    </div>
+
+
+
+
+    {% endfor %}
+           
+    
+</tbody>
+</table>
+</div>
+</div>

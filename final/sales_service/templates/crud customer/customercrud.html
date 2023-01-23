@@ -1,0 +1,185 @@
+{% include 'index.html' %}
+<div class="content-body">
+    <div class="container-fluid">
+        
+      
+    <table id="example" class="table table-striped"  >
+        <thead>
+            <tr>
+            <th>Customer Name</th>
+            <th>Customer Mail</th>
+            <th>Status</th>
+            <th>Customer Number</th>
+            <th>Action</th></tr>
+            
+            
+        </thead>
+        
+        <tbody>
+            {% for i in customers %}
+           
+            <tr>            <td style="color:rgb(43, 42, 41)">{{ i.CustomerName }}</td>
+            <td style="color: rgb(43, 42, 41);">{{ i.CustomerEMail }}</td>
+            <td style="color:rgb(43, 42, 41)">{{ i.Status }}</td>
+            <td style="color:rgb(43, 42, 41)">{{ i.CustomerPhoneNo }}</td>
+            
+            <td><div class="dropdown">
+                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"  role="button" data-toggle="dropdown" aria-expanded="false">
+                  <i class="dw dw-more"style="color:red;"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list" style="">
+                  <a class="dropdown-item"data-toggle="modal" data-target=".bdss-example-modal-lg{{ i.id }}" ><i  class="fa-solid fa-eye" style="color:green;" ></i> View</a>
+                  <a class="dropdown-item"data-toggle="modal" data-target=".bd-example-modal-lg{{ i.id }}" ><i class="fa-solid fa-pencil" style="color:black;"></i> Edit</a>
+                  <a class="dropdown-item"data-toggle="modal" data-target=".bds-example-modal-lg{{ i.id }}" ><i class="fa-regular fa-trash-can"style="color:red;"></i> Delete</a>
+                </div>
+              </div></td>
+            </tr>
+<!--view model-->
+<div class="modal fade bdss-example-modal-lg{{ i.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Customer Info</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul style="font-size: larger;"><li ><span style="color: rgb(0, 0, 0); font-weight: 600;">Customer Name:</span><b style="color:rgb(109, 229, 235)">{{ i.CustomerName }}</b></li><br>
+                    <li><span style="color: rgb(0, 0, 0); font-weight: 600;">Customer Number:</span><b style="color:rgb(164, 171, 172)">{{ i.CustomerPhoneNo }}</b></li><br>
+                    <li><span style="color: rgb(0, 0, 0); font-weight: 600;">Email:</span><b style="color:rgb(164, 171, 172)" >{{ i.CustomerEMail }}</b></li><br>
+                    <li><span style="color: rgb(0, 0, 0); font-weight: 600;">Address:</span><b style="color:rgb(164, 171, 172)">{{ i.CustomerAddress }}</b></li><br>
+                    <li><span style="color: rgb(0, 0, 0); font-weight: 600;">Status:</span><b style="color:rgb(164, 171, 172)">{{ i.Status }}</b></li><br>
+                    <li><span style="color: rgb(0, 0, 0); font-weight: 600;">Notes:</span><b style="color:rgb(164, 171, 172)">{{ i.Notes }}</b></li><br>
+                    
+                </ul>
+                
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                
+                            </div>
+                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+           
+          
+        </div>
+    </div>
+
+
+
+
+
+<!--view model-->
+
+
+            <!--delete model-->
+<div class="modal fade bds-example-modal-lg{{ i.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Customer</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'deletecustomer' i.id  %}" method="POST">
+                <!--content-->
+                <h4>Are you sure you want to delet these records ?</h4>
+               Customer Name:<span><b>{{ i.CustomerName }}</b></span>
+               <p style="color:red;">If it done you cannot retrive these records !!!!</p>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Delete</button>
+                            </div>
+                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+           
+          
+        </div>
+    </div>
+
+
+           
+    <!--model update-->
+    
+<div class="modal fade bd-example-modal-lg{{ i.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--content-->
+                <div class="card-body">
+                    <div class="basic-form">
+                        <form method="post" action='{% url "updatecustomer" i.id %}'>
+                            {% csrf_token %}
+    
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Customer Name</label>
+                                    <input type="text" class="form-control" placeholder="Name" value={{ i.CustomerName }} id="CustomerName" name="CustomerName" Required>
+                                </div>
+                               
+                                
+                                <div class="form-group col-md-6">
+                                    <label>Phone Number</label>
+                                    <input type="Number" class="form-control" value={{ i.CustomerPhoneNo }} name="CustomerPhoneNo" id="CustomerPhoneNo" Required  >
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" value={{ i.CustomerEMail }}  name="CustomerEMail"  placeholder="Email" Required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Address</label>
+                                    <input type="text" class="form-control" value={{ i.CustomerAddress }} name="CustomerAddress" id="CustomerAddress" Required >
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>Status</label>
+                                    <select id="Status" name="Status" class="form-control" value={{ i.Status }} Required>
+                                        <option >Choose...</option>
+                                        <option>Active</option>
+                                        <option>NON-Active</option>
+                                       
+                                    </select>
+                                </div>
+                                
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Notes</label>
+                                <textarea class="form-control" rows="4" id="Notes" name="Notes" value={{ i.Notes }} Required></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+           
+          
+        </div>
+    </div>
+
+
+
+
+    {% endfor %}
+           
+    
+</tbody>
+</table>
+</div>
+</div>

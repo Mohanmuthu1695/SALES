@@ -1,0 +1,195 @@
+{% include 'index.html' %}
+<div class="content-body">
+    <div class="container-fluid">
+        
+      
+    <table id="example" class="table table-striped"  >
+        <thead>
+            <tr>
+            <th>Staff ID</th>
+            <th>Staff Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+            
+            
+        </thead>
+        
+        <tbody>
+            {% for j in staffs %}
+           
+            <tr>
+            <td style="color:rgb(43, 42, 41)">{{ j.EMP_ID }}</td>
+            <td style="color:rgb(43, 42, 41)">{{ j.EMP_Name }}</td>
+            <td style="color:rgb(43, 42, 41)">{{ j.Email }}</td>
+            <td style="color:rgb(43, 42, 41)">{{ j.Role }}</td>
+            <td style="color:rgb(43, 42, 41)">{{ j.Status }}</td>
+            
+            <td><div class="dropdown">
+                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"  role="button" data-toggle="dropdown" aria-expanded="false">
+                  <i class="dw dw-more"style="color:red;"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list" style="">
+                  <a class="dropdown-item"data-toggle="modal" data-target="#" ><i  class="fa-solid fa-eye" style="color:green;" ></i> View</a>
+                  <a class="dropdown-item"data-toggle="modal" data-target=".bd-example-modal-lg{{ j.id }}" ><i class="fa-solid fa-pencil" style="color:black;"></i> Edit</a>
+                  <a class="dropdown-item"data-toggle="modal" data-target=".bds-example-modal-lg{{ j.id }}" ><i class="fa-regular fa-trash-can"style="color:red;"></i> Delete</a>
+                </div>
+              </div></td>
+            </tr>
+
+
+
+
+            <!--delete model-->
+<div class="modal fade bds-example-modal-lg{{ j.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Staff</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'deletestaff' j.id  %}" method="POST">
+                <!--content-->
+                <h4>Are you sure you want to delet these records ?</h4>
+               Staff Name:<span><b>{{ j.EMP_Name }}</b></span>
+               Staff ID:<span><b>{{ j.EMP_ID }}</b></span>
+               <p style="color:red;">If it done you cannot retrive these records !!!!</p>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Delete</button>
+                            </div>
+                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+           
+          
+        </div>
+    </div>
+
+
+           
+    <!--model update-->
+    
+<div class="modal fade bd-example-modal-lg{{ j.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Staff</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--content-->
+                <div class="card-body">
+                    <div class="basic-form">
+                        <form method="post" action='{% url "updatestaff" j.id %}'>
+                            {% csrf_token %}
+    
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Employee ID</label>
+                                    <input type="Number" class="form-control"  value={{ j.EMP_ID }} id="EMP_ID" name="EMP_ID" Required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Employee Name</label>
+                                    <input type="text" class="form-control" value={{ j.EMP_Name }} id="EMP_Name" name="EMP_Name" Required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control"  value={{ j.Email }} id="Email" name="Email" Required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Date of Birth</label>
+                                    <input type="date" class="form-control"  value={{ j.D_O_B }} id="D_O_B" name="D_O_B" Required>
+                                </div>
+                               
+                                
+                               
+                                <div class="form-group col-md-6">
+                                    <label> Qualifiaction</label>
+                                   
+                                    <select id="Qualifiaction" name="Qualifiaction" class="form-control" value={{ j.Qualifiaction }} Required>
+                                        <option value="" selected="selected" disabled="disabled">-- select one --</option>
+                                        <option value="No formal education">No formal education</option>
+                                        <option value="Primary education">Primary education</option>
+                                        <option value="Secondary education">Secondary education or high school</option>
+                                        <option value="GED">GED</option>
+                                        <option value="Vocational qualification">Vocational qualification</option>
+                                        <option value="Bachelor's degree">Bachelor's degree</option>
+                                        <option value="Master's degree">Master's degree</option>
+                                        <option value="Doctorate or higher">Doctorate or higher</option>
+                                       
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Address</label>
+                                    <input type="text" class="form-control" value={{ j.Address }} name="Address" id="Address" Required >
+                                </div>
+                           
+                          
+                                <div class="form-group col-md-6">
+                                    <label>Employee Role</label>
+                                    <select id="Role" name="Role" class="form-control" value={{ j.Role }} Required>
+                                        <option >Choose...</option>
+                                        <option>Sales</option>
+                                        <option>Service</option>
+                                       
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group col-md-6">
+                                    <label>Contact Number</label>
+                                    <input type="Number" class="form-control" name="Mobile" id="Mobile"value={{ j.Mobile }} Required  >
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Date of Join</label>
+                                    <input type="date" class="form-control" name="Join_date" id="Join_date" value={{ j.Join_date }} Required  >
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Employee Status</label>
+                                    <select id="Status" name="Status" class="form-control" value={{ j.Status }} Required>
+                                        <option selected="">Choose...</option>
+                                        <option>Active</option>
+                                        <option>NON-Active</option>
+                                       
+                                    </select>
+                                </div>
+    
+    
+                           
+                        
+                            <div class="form-group col-md-4">
+                                <label>Notes</label>
+                                <textarea class="form-control" rows="4" id="Notess" name="Notess" Required></textarea>
+                            </div>
+                        </div><div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+           
+          
+        </div>
+    </div>
+
+
+
+
+    {% endfor %}
+           
+    
+</tbody>
+</table>
+</div>
+</div>

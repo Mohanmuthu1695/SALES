@@ -1,0 +1,88 @@
+{% include "index.html" %}
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                           </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="card">
+                    <div class="stat-widget-one card-body">
+                        <div class="stat-icon d-inline-block">
+                            <i class="ti-user text-primary border-primary"></i>
+                        </div>
+                        <a href='{% url "invoicepage" %}'><div class="stat-content d-inline-block">
+                            <div class="stat-text">Total Sales</div>
+                            <div class="stat-digit">{{ customers_count }}</div>
+                            
+                        </div></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="card">
+                    <div class="stat-widget-one card-body">
+                        <div class="stat-icon d-inline-block">
+                            <i class="ti-layout-grid2 text-pink border-pink"></i>
+                        </div>
+                        <div class="stat-content d-inline-block">
+                            <div class="stat-text">Products</div>
+                            <div class="stat-digit">{{ products_count }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+               
+            </div>
+        </div>
+        <div class="row">
+
+<!--product table-->
+            <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Table Bordered</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-responsive-sm">
+                                        <thead>
+                                          
+                                            <tr>
+                                                <th>Product ID</th>
+                                                <th>Product Name</th>
+                                                <th>Product Category</th>
+                                                <th>M.R.P</th>
+                                                <th>Rate</th>
+                                                <th>Quantity</th>
+                                                <th>Units</th>
+                                                <th>Product Image</th>
+                                                <th>Status</th>
+                                                <th>Notes</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for k in products %}
+                                            <tr>
+                                                <td>{{k.P_ID}}</td>
+                                                <td>{{k.Name}}</td>
+                                                <td>{{k.category}}</td>
+                                                <td>{{k.M_R_P}}</td>
+                                                <td>{{k.Rate}}</td>
+                                                <td>{{k.Quantity}}</td>
+                                                <td>{{k.Units}}</td>
+                                                <td><img src="{{k.product_image}}" alt="" class="productsize"></td>
+                                                <td>{{k.Status}}</td>
+                                                <td>{{k.Notes}}</td>
+                                                
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+
+
+        </div>
+
+
+    </div>
+</div>

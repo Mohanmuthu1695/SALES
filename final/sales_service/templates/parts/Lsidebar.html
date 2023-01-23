@@ -1,0 +1,64 @@
+{% load static %}
+<!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="quixnav">
+            <div class="quixnav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li class="nav-label first">Main Menu</li>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+                                class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href=#>Customer</a></li>
+                            <li><a href=#>Employees</a></li>
+                            <li><a href='{% url "Pdashboard" %}'>Product</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-label">Profile</li>
+                    <li><a ><i class="fa-solid fa-id-badge"></i><span class="nav-text">Employee Profile</span></a></li>
+                        <li><a ><i class="fa-solid fa-user-plus"></i><span class="nav-text">Customer Profile</span></a></li>
+                   
+                    
+                    <li class="nav-label">Components</li>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa-solid fa-user-gear"></i><span class="nav-text">Employees</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="{% url 'staffdata' %}">View Staff</a></li>
+                            <li><a href="{% url 'staffview' %}">Create Staff</a></li>
+                         </ul>
+                    </li>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa-solid fa-users"></i><span class="nav-text">Customer</span></a>
+                <ul aria-expanded="false">
+                    <li><a href="{% url 'customerdetail' %}">View Customer</a></li>
+                    <li><a href='{% url "createpath" %}'>Create Customer</a></li>
+                 </ul>
+            </li>
+            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa-solid fa-cart-shopping"></i><span class="nav-text">Products</span></a>
+        <ul aria-expanded="false">
+            <li><a href="{% url 'productview' %}">View Product</a></li>
+            <li><a href="{% url 'createproduct' %}">Create Products</a></li>
+         </ul>
+    </li>
+
+                    {% comment %} <li><a class="has-arrow" href="{% url 'staffview' %}" aria-expanded="false"><i
+                                class="icon icon-plug"></i><span class="nav-text">Plugins</span></a>
+                        
+                    </li>
+                    <li><a href='{% url "createpath" %}' aria-expanded="false"><i class="icon icon-globe-2"></i><span
+                                class="nav-text">Widget</span></a></li> {% endcomment %}
+                   
+                   
+
+                   <br>
+                   <br>
+                   <br>
+                   <li><a href="{% url 'signout' %}" ><i class="fa-solid fa-unlock"></i><span class="nav-text">Lock Screen</span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+        <!--**********************************
+            Sidebar end
+        **********************

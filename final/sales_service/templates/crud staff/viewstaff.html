@@ -1,0 +1,35 @@
+<div class="col-5">
+
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Staff Details</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-responsive-sm">
+        <thead>
+            <th>Staff Name</th>
+            <th>Staff Role</th>
+            <th>Status</th>
+            
+            
+        </thead>
+        <tbody>
+            {% for j in staffs %}
+            <tr>
+            <td style="color:rgb(43, 42, 41)">{{ j.EMP_Name }}</td>
+            <td style="color:rgb(43, 42, 41)">{{ j.Role }}</td>
+            <td style="color:rgb(43, 42, 41)">{{ j.Status }}</td>
+           
+            
+            </tr>
+            {% endfor %}
+    
+        </tbody>
+      </table>
+    
+     
+
+
+    </div> 
+</div>
