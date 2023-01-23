@@ -30,7 +30,7 @@ class product(models.Model):
     Rate=models.IntegerField()
     Quantity=models.IntegerField()
     Units=models.IntegerField()
-    product_image=models.ImageField(upload_to="media/product")
+    product_image=models.ImageField(upload_to="media/")
     Status=models.CharField(max_length=50)
     Notes=models.CharField(max_length=50)    
     

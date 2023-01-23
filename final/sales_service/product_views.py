@@ -13,8 +13,10 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 #productview 
 def productview(request):
-    products=product.objects.all().values()
-    return render(request,"crud product/product_crud.html",{ 'products':products})
+    if request.method == 'GET':
+   
+        products=product.objects.all().values()
+        return render(request,"crud product/product_crud.html",{ 'products':products})
 def productsave(request):
     if request.method=="POST":
        

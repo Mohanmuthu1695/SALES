@@ -120,7 +120,7 @@ def registeruser(request):
         return redirect(loginn)
 def signout(request):
     logout(request)
-    return redirect(landing)
+    return redirect(loginn)
 
 # customer filter
     
